@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TS FITNESS — TRAIN SMART. TRAIN STRONG.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --cream: #f5f0e8;
+    --acid: #c8ff00;
+    --red: #ff2b2b;
+    --gray: #1a1a1a;
+    --mid: #2e2e2e;
+    --text-muted: #777;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--acid);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1px solid rgba(200,255,0,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    background: transparent;
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+  }
+  .logo span { color: var(--acid); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--acid); }
+  .nav-cta {
+    background: var(--acid);
+    color: var(--black);
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--cream); transform: translateY(-1px); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(200,255,0,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,43,43,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 9vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title .accent { color: var(--acid); display: block; }
+  .hero-sub {
+    margin-top: 32px;
+    max-width: 400px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--acid);
+    color: var(--black);
+    padding: 16px 40px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: none;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 40px;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(245,240,232,0.2);
+    cursor: none;
+    transition: all 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--acid); color: var(--acid); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 32px;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+  }
+  .hero-visual {
+    width: 380px;
+    height: 480px;
+    position: relative;
+  }
+  .hero-card {
+    position: absolute;
+    background: var(--gray);
+    border: 1px solid var(--mid);
+    padding: 28px;
+  }
+  .hero-card.main { inset: 0; display: flex; flex-direction: column; justify-content: flex-end; }
+  .hero-card.main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,255,0,0.05), transparent 60%);
+  }
+  .hero-card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .hero-card-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4.5rem;
+    color: var(--acid);
+    line-height: 1;
+  }
+  .hero-card-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
+  .hero-card.float-1 {
+    width: 160px;
+    top: -20px; right: -30px;
+    background: var(--acid);
+    color: var(--black);
+    border: none;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+  }
+  .hero-card.float-1 .hero-card-label { color: rgba(0,0,0,0.5); }
+  .hero-card.float-1 .hero-card-value { font-size: 2.8rem; color: var(--black); }
+  .hero-card.float-2 {
+    width: 180px;
+    bottom: -20px; left: -30px;
+    z-index: 2;
+    background: var(--mid);
+    animation: float 4s ease-in-out infinite reverse;
+  }
+  .big-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: rgba(200,255,0,0.06);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--mid);
+    border-bottom: 1px solid var(--mid);
+    padding: 18px 0;
+    background: var(--gray);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .marquee-item .dot { width: 6px; height: 6px; background: var(--acid); border-radius: 50%; }
+
+  /* PROGRAMS */
+  #programs { padding: 100px 48px; }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+  }
+  .section-link {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--mid);
+    padding-bottom: 4px;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: none;
+  }
+  .section-link:hover { color: var(--acid); border-color: var(--acid); }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .program-card {
+    background: var(--gray);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: none;
+  }
+  .program-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--acid);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4,0,0,1);
+  }
+  .program-card:hover::before { transform: scaleX(1); }
+  .program-card:hover { background: var(--mid); }
+  .program-icon { font-size: 2.5rem; margin-bottom: 24px; display: block; }
+  .program-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: rgba(245,240,232,0.05);
+    position: absolute;
+    top: 16px; right: 24px;
+    line-height: 1;
+  }
+  .program-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .program-desc { font-size: 0.85rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 24px; }
+  .program-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--mid);
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+  .program-card:hover .program-tag { border-color: var(--acid); color: var(--acid); }
+
+  /* TIMER */
+  #timer { padding: 80px 48px; background: var(--gray); }
+  .timer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .timer-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 16px;
+  }
+  .timer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+  .timer-desc { color: var(--text-muted); line-height: 1.7; font-size: 0.9rem; margin-bottom: 32px; }
+  .workout-timer {
+    background: var(--black);
+    border: 1px solid var(--mid);
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .workout-timer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--acid), var(--red));
+  }
+  .timer-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 7rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    color: var(--acid);
+    transition: color 0.3s;
+  }
+  .timer-display.rest { color: var(--red); }
+  .timer-phase {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .timer-controls { display: flex; gap: 12px; justify-content: center; margin-top: 32px; }
+  .timer-btn {
+    padding: 12px 32px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .timer-btn.start { background: var(--acid); color: var(--black); }
+  .timer-btn.start:hover { background: var(--cream); }
+  .timer-btn.reset { background: var(--mid); color: var(--cream); }
+  .timer-btn.reset:hover { opacity: 0.7; }
+  .interval-presets { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .preset-btn {
+    padding: 6px 16px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--mid);
+    color: var(--text-muted);
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .preset-btn:hover, .preset-btn.active { border-color: var(--acid); color: var(--acid); }
+  .progress-ring-wrap { position: relative; display: inline-block; margin-bottom: 8px; }
+  .progress-ring { transform: rotate(-90deg); }
+  .progress-ring-bg { fill: none; stroke: var(--mid); stroke-width: 4; }
+  .progress-ring-fill {
+    fill: none;
+    stroke: var(--acid);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 502;
+    stroke-dashoffset: 502;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s;
+  }
+  .progress-ring-fill.rest-color { stroke: var(--red); }
+  .timer-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* BMI */
+  #bmi { padding: 100px 48px; }
+  .bmi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .input-group { margin-bottom: 24px; }
+  .input-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .input-row { display: flex; gap: 12px; }
+  .ts-input {
+    flex: 1;
+    background: var(--gray);
+    border: 1px solid var(--mid);
+    color: var(--cream);
+    padding: 14px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .ts-input:focus { border-color: var(--acid); }
+  .ts-input::placeholder { color: var(--text-muted); }
+  .bmi-result {
+    background: var(--gray);
+    border: 1px solid var(--mid);
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .bmi-result::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--mid);
+    transition: background 0.5s;
+  }
+  .bmi-result.underweight::before { background: #5ba4cf; }
+  .bmi-result.normal::before { background: var(--acid); }
+  .bmi-result.overweight::before { background: #f4a837; }
+  .bmi-result.obese::before { background: var(--red); }
+  .bmi-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--acid);
+    transition: color 0.5s;
+  }
+  .bmi-category { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.05em; margin: 8px 0; }
+  .bmi-advice { font-size: 0.82rem; color: var(--text-muted); max-width: 260px; line-height: 1.6; margin-top: 12px; }
+  .bmi-placeholder { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* STATS */
+  #stats { padding: 80px 48px; background: var(--acid); color: var(--black); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+  .stat-card {
+    padding: 48px 32px;
+    background: var(--acid);
+    border-right: 1px solid rgba(0,0,0,0.15);
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-card:hover { background: #baef00; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; letter-spacing: 0.02em; }
+  .stat-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; opacity: 0.6; }
+
+  /* TESTIMONIALS */
+  #testimonials { padding: 100px 48px; }
+  .testimonials-slider { overflow: hidden; position: relative; }
+  .testimonials-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .testimonial-card {
+    min-width: calc(50% - 12px);
+    background: var(--gray);
+    border: 1px solid var(--mid);
+    padding: 48px;
+  }
+  .testimonial-quote { font-family: 'Bebas Neue', sans-serif; font-size: 6rem; color: var(--acid); line-height: 0.6; margin-bottom: 24px; opacity: 0.5; }
+  .testimonial-text { font-size: 1rem; line-height: 1.75; color: var(--cream); margin-bottom: 32px; }
+  .testimonial-author { display: flex; align-items: center; gap: 16px; }
+  .author-avatar {
+    width: 48px; height: 48px;
+    background: var(--mid);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--acid);
+  }
+  .author-name { font-weight: 500; font-size: 0.9rem; }
+  .author-role { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  .stars { color: var(--acid); font-size: 0.9rem; margin-bottom: 4px; }
+  .slider-nav { display: flex; gap: 12px; margin-top: 32px; }
+  .slider-btn {
+    width: 48px; height: 48px;
+    background: var(--gray);
+    border: 1px solid var(--mid);
+    color: var(--cream);
+    font-size: 1.2rem;
+    cursor: none;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-btn:hover { background: var(--acid); color: var(--black); border-color: var(--acid); }
+
+  /* CTA */
+  #cta { padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
+  .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,255,0,0.08) 0%, transparent 70%); }
+  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,8vw,8rem); line-height: 0.9; position: relative; }
+  .cta-title .line2 { color: var(--acid); }
+  .cta-sub { font-size: 1rem; color: var(--text-muted); margin-top: 24px; margin-bottom: 48px; position: relative; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; position: relative; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--mid);
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--black);
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.1em; }
+  .footer-logo span { color: var(--acid); }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.75rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; cursor: none; }
+  .footer-links a:hover { color: var(--acid); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 120px 24px 60px; }
+    .hero-right { display: none; }
+    #programs, #timer, #bmi, #testimonials, #cta, footer { padding-left: 24px; padding-right: 24px; }
+    .programs-grid { grid-template-columns: 1fr; gap: 2px; }
+    .timer-inner, .bmi-grid { grid-template-columns: 1fr; gap: 40px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .testimonial-card { min-width: 100%; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="navbar">
+  <div class="logo">TS <span>FITNESS</span></div>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#timer">Workout</a></li>
+    <li><a href="#bmi">BMI Calc</a></li>
+    <li><a href="#testimonials">Results</a></li>
+  </ul>
+  <button class="nav-cta">Start Free Trial</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <p class="hero-tag">⚡ Est. 2018 — Karachi & Online</p>
+    <h1 class="hero-title">
+      TRAIN<br>SMART.<br>
+      <span class="accent">TRAIN STRONG.</span>
+    </h1>
+    <p class="hero-sub">TS Fitness is where elite methodology meets everyday discipline. Personalized coaching, science-backed programming, and a community that refuses to quit.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">Explore Programs</button>
+      <button class="btn-ghost" onclick="document.getElementById('bmi').scrollIntoView({behavior:'smooth'})">Check Your BMI</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="big-number">TS</div>
+      <div class="hero-card main">
+        <p class="hero-card-label">Active Members</p>
+        <div class="hero-card-value" id="heroCount">0</div>
+        <p class="hero-card-desc">and growing every week</p>
+      </div>
+      <div class="hero-card float-1">
+        <p class="hero-card-label">Avg. Weight Lost</p>
+        <div class="hero-card-value">-18kg</div>
+      </div>
+      <div class="hero-card float-2">
+        <p class="hero-card-label">Success Rate</p>
+        <div class="hero-card-value" style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--acid)">94%</div>
+        <p class="hero-card-desc">hit their 90-day goal</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Strength Training <span class="dot"></span></div>
+    <div class="marquee-item">HIIT Cardio <span class="dot"></span></div>
+    <div class="marquee-item">Body Transformation <span class="dot"></span></div>
+    <div class="marquee-item">Sports Performance <span class="dot"></span></div>
+    <div class="marquee-item">Nutrition Coaching <span class="dot"></span></div>
+    <div class="marquee-item">Online Programs <span class="dot"></span></div>
+    <div class="marquee-item">1-on-1 Coaching <span class="dot"></span></div>
+    <div class="marquee-item">Mobility & Recovery <span class="dot"></span></div>
+    <div class="marquee-item">Strength Training <span class="dot"></span></div>
+    <div class="marquee-item">HIIT Cardio <span class="dot"></span></div>
+    <div class="marquee-item">Body Transformation <span class="dot"></span></div>
+    <div class="marquee-item">Sports Performance <span class="dot"></span></div>
+    <div class="marquee-item">Nutrition Coaching <span class="dot"></span></div>
+    <div class="marquee-item">Online Programs <span class="dot"></span></div>
+    <div class="marquee-item">1-on-1 Coaching <span class="dot"></span></div>
+    <div class="marquee-item">Mobility & Recovery <span class="dot"></span></div>
+  </div>
+</div>
+
+<section id="programs">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-tag">What We Offer</p>
+      <h2 class="section-title">OUR<br>PROGRAMS</h2>
+    </div>
+    <a href="#" class="section-link">View All Programs →</a>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <span class="program-icon">🏋️</span>
+      <span class="program-num">01</span>
+      <h3 class="program-title">Power Lift</h3>
+      <p class="program-desc">Progressive overload methodology designed to build raw strength and muscle mass over 12 structured weeks.</p>
+      <span class="program-tag">12 Weeks · Advanced</span>
+    </div>
+    <div class="program-card reveal">
+      <span class="program-icon">🔥</span>
+      <span class="program-num">02</span>
+      <h3 class="program-title">Burn Protocol</h3>
+      <p class="program-desc">High-intensity interval circuits engineered to maximize caloric burn and metabolic conditioning.</p>
+      <span class="program-tag">8 Weeks · All Levels</span>
+    </div>
+    <div class="program-card reveal">
+      <span class="program-icon">⚡</span>
+      <span class="program-num">03</span>
+      <h3 class="program-title">Athletic Edge</h3>
+      <p class="program-desc">Sport-specific performance training combining agility, speed, and explosive power for athletes.</p>
+      <span class="program-tag">10 Weeks · Intermediate</span>
+    </div>
+    <div class="program-card reveal">
+      <span class="program-icon">🧘</span>
+      <span class="program-num">04</span>
+      <h3 class="program-title">Mobility Reset</h3>
+      <p class="program-desc">Functional movement screening paired with corrective exercise to eliminate pain and improve performance.</p>
+      <span class="program-tag">6 Weeks · Beginner</span>
+    </div>
+    <div class="program-card reveal">
+      <span class="program-icon">🎯</span>
+      <span class="program-num">05</span>
+      <h3 class="program-title">Body Recomp</h3>
+      <p class="program-desc">The holy grail — simultaneously build muscle and shed fat with our precision macro and training system.</p>
+      <span class="program-tag">16 Weeks · All Levels</span>
+    </div>
+    <div class="program-card reveal">
+      <span class="program-icon">🤝</span>
+      <span class="program-num">06</span>
+      <h3 class="program-title">1-on-1 Coaching</h3>
+      <p class="program-desc">Fully personalized program, nutrition plan, and weekly check-ins directly with a TS certified coach.</p>
+      <span class="program-tag">Ongoing · Premium</span>
+    </div>
+  </div>
+</section>
+
+<section id="timer">
+  <div class="timer-inner">
+    <div class="reveal">
+      <p class="timer-label">Interactive Tool</p>
+      <h2 class="timer-title">HIIT INTERVAL<br>TIMER</h2>
+      <p class="timer-desc">Use our built-in HIIT timer during your workouts. Choose a preset interval or customize your work and rest periods for peak performance.</p>
+      <div class="interval-presets">
+        <button class="preset-btn active" data-work="20" data-rest="10">Tabata<br>20/10</button>
+        <button class="preset-btn" data-work="30" data-rest="15">Classic<br>30/15</button>
+        <button class="preset-btn" data-work="40" data-rest="20">Endurance<br>40/20</button>
+        <button class="preset-btn" data-work="45" data-rest="15">TS Protocol<br>45/15</button>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="workout-timer">
+        <div class="timer-phase" id="timerPhase">READY TO GO</div>
+        <div class="progress-ring-wrap">
+          <svg class="progress-ring" width="200" height="200" viewBox="0 0 200 200">
+            <circle class="progress-ring-bg" cx="100" cy="100" r="80"/>
+            <circle class="progress-ring-fill" cx="100" cy="100" r="80" id="progressRing"/>
+          </svg>
+          <div class="timer-center">
+            <div class="timer-display" id="timerDisplay">00</div>
+          </div>
+        </div>
+        <div id="roundDisplay" style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:8px;">ROUND 1 / 8</div>
+        <div class="timer-controls">
+          <button class="timer-btn start" id="startBtn">Start</button>
+          <button class="timer-btn reset" id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bmi">
+  <div class="bmi-grid">
+    <div class="reveal">
+      <p class="section-tag">Health Tool</p>
+      <h2 class="section-title">BMI<br>CALCULATOR</h2>
+      <p style="color:var(--text-muted);margin:20px 0 40px;line-height:1.7;font-size:0.9rem;">Know where you stand. Calculate your Body Mass Index and get targeted advice to help you reach your optimal composition.</p>
+      <div class="input-group">
+        <label class="input-label">Height</label>
+        <div class="input-row">
+          <input type="number" class="ts-input" id="heightFt" placeholder="Feet" min="1" max="8">
+          <input type="number" class="ts-input" id="heightIn" placeholder="Inches" min="0" max="11">
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Weight (kg)</label>
+        <input type="number" class="ts-input" id="weight" placeholder="Enter weight in kg" style="width:100%">
+      </div>
+      <button class="btn-primary" id="calcBmiBtn" style="margin-top:8px">Calculate BMI</button>
+    </div>
+    <div class="reveal">
+      <div class="bmi-result" id="bmiResult">
+        <p class="bmi-placeholder">Enter your details to<br>see your BMI result</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-card reveal">
+      <div class="stat-num" data-target="2400">0</div>
+      <div class="stat-label">Members Trained</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num" data-target="94">0</div>
+      <div class="stat-label">% Success Rate</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num" data-target="6">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num" data-target="18">0</div>
+      <div class="stat-label">Avg KG Lost in 90 Days</div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-tag">Client Results</p>
+      <h2 class="section-title">REAL<br>STORIES</h2>
+    </div>
+  </div>
+  <div class="testimonials-slider reveal">
+    <div class="testimonials-track" id="testimonialsTrack">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">I lost 22kg in 5 months with TS Fitness. Not through starvation or crash diets — through smart training and a sustainable nutrition plan. My life has genuinely changed.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AK</div>
+          <div>
+            <div class="author-name">Ahmed K.</div>
+            <div class="author-role">Lost 22kg — Body Recomp Program</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">As a competitive cricketer, Athletic Edge transformed my on-field performance. My sprint speed, reaction time, and endurance improved dramatically within 8 weeks.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SR</div>
+          <div>
+            <div class="author-name">Saad R.</div>
+            <div class="author-role">Cricketer — Athletic Edge Program</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">I had lower back issues for years. After just 6 weeks of Mobility Reset with my TS coach, I'm pain-free and squatting more than I ever have. Absolutely incredible.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">FA</div>
+          <div>
+            <div class="author-name">Farida A.</div>
+            <div class="author-role">Mobility Reset — 1-on-1 Coaching</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">The Power Lift program took my bench from 60kg to 100kg in 12 weeks. The programming is elite-level. I finally feel like I know what I'm doing in the gym.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">HM</div>
+          <div>
+            <div class="author-name">Hassan M.</div>
+            <div class="author-role">Bench +40kg — Power Lift Program</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav">
+      <button class="slider-btn" id="prevBtn">←</button>
+      <button class="slider-btn" id="nextBtn">→</button>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-bg"></div>
+  <h2 class="cta-title reveal">
+    YOUR BEST SELF<br>
+    <span class="line2">STARTS NOW.</span>
+  </h2>
+  <p class="cta-sub reveal">14 days free. No credit card. Cancel anytime. Just results.</p>
+  <div class="cta-actions reveal">
+    <button class="btn-primary">Start Free Trial</button>
+    <button class="btn-ghost">Book a Consult</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">TS <span>FITNESS</span></div>
+  <div class="footer-links">
+    <a href="#">Programs</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Instagram</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 TS Fitness. All rights reserved.</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('button, a, .program-card, .preset-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), 100);
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => revealObs.observe(r));
+
+function animateCount(el, target, duration = 2000) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const interval = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target.toLocaleString(); clearInterval(interval); return; }
+    el.textContent = Math.floor(start).toLocaleString();
+  }, 16);
+}
+setTimeout(() => animateCount(document.getElementById('heroCount'), 2400), 1200);
+
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      animateCount(el, parseInt(el.dataset.target), 1500);
+      statObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => statObs.observe(el));
+
+let workTime = 20, restTime = 10, totalRounds = 8;
+let currentTime = workTime, currentRound = 1, isWork = true, running = false;
+let timerInterval = null;
+const circumference = 2 * Math.PI * 80;
+const timerDisplay = document.getElementById('timerDisplay');
+const timerPhase = document.getElementById('timerPhase');
+const roundDisplay = document.getElementById('roundDisplay');
+const progressRing = document.getElementById('progressRing');
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+progressRing.style.strokeDasharray = circumference;
+
+function updateRing(time, total) {
+  progressRing.style.strokeDashoffset = circumference * (1 - time / total);
+}
+function updateDisplay() {
+  timerDisplay.textContent = String(currentTime).padStart(2, '0');
+  timerPhase.textContent = isWork ? 'WORK' : 'REST';
+  timerDisplay.classList.toggle('rest', !isWork);
+  progressRing.classList.toggle('rest-color', !isWork);
+  roundDisplay.textContent = `ROUND ${currentRound} / ${totalRounds}`;
+  updateRing(currentTime, isWork ? workTime : restTime);
+}
+function tick() {
+  if (currentTime <= 0) {
+    if (!isWork) {
+      currentRound++;
+      if (currentRound > totalRounds) {
+        clearInterval(timerInterval); running = false;
+        startBtn.textContent = 'Start';
+        timerPhase.textContent = 'COMPLETE! 🔥';
+        timerDisplay.textContent = '00';
+        progressRing.style.strokeDashoffset = 0;
+        return;
+      }
+    }
+    isWork = !isWork;
+    currentTime = isWork ? workTime : restTime;
+  } else { currentTime--; }
+  updateDisplay();
+}
+startBtn.addEventListener('click', () => {
+  if (running) { clearInterval(timerInterval); running = false; startBtn.textContent = 'Resume'; }
+  else { running = true; startBtn.textContent = 'Pause'; timerInterval = setInterval(tick, 1000); }
+});
+resetBtn.addEventListener('click', () => {
+  clearInterval(timerInterval); running = false; startBtn.textContent = 'Start';
+  currentTime = workTime; currentRound = 1; isWork = true;
+  updateDisplay(); timerPhase.textContent = 'READY TO GO';
+});
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    clearInterval(timerInterval); running = false; startBtn.textContent = 'Start';
+    workTime = parseInt(btn.dataset.work); restTime = parseInt(btn.dataset.rest);
+    currentTime = workTime; currentRound = 1; isWork = true;
+    updateDisplay(); timerPhase.textContent = 'READY TO GO';
+  });
+});
+updateDisplay();
+
+document.getElementById('calcBmiBtn').addEventListener('click', () => {
+  const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+  const inch = parseFloat(document.getElementById('heightIn').value) || 0;
+  const kg = parseFloat(document.getElementById('weight').value);
+  const meters = (ft * 12 + inch) * 0.0254;
+  const result = document.getElementById('bmiResult');
+  if (!kg || !meters) { result.innerHTML = '<p class="bmi-placeholder">Please fill in all fields.</p>'; return; }
+  const bmi = (kg / (meters * meters)).toFixed(1);
+  let category, advice, cls, color;
+  if (bmi < 18.5) { category = 'Underweight'; cls = 'underweight'; color = '#5ba4cf'; advice = 'Focus on caloric surplus and strength training to build lean muscle mass.'; }
+  else if (bmi < 25) { category = 'Normal Weight'; cls = 'normal'; color = '#c8ff00'; advice = "You're in a healthy range! Focus on maintaining with balanced training and nutrition."; }
+  else if (bmi < 30) { category = 'Overweight'; cls = 'overweight'; color = '#f4a837'; advice = 'A combination of cardio and strength training with a mild caloric deficit will help.'; }
+  else { category = 'Obese'; cls = 'obese'; color = '#ff2b2b'; advice = 'Start with low-impact exercise and consult a TS coach for a personalized approach.'; }
+  result.className = `bmi-result ${cls}`;
+  result.innerHTML = `<div class="bmi-num" style="color:${color}">${bmi}</div><div class="bmi-category">${category}</div><p class="bmi-advice">${advice}</p>`;
+});
+
+let currentSlide = 0;
+const track = document.getElementById('testimonialsTrack');
+const cards = track.querySelectorAll('.testimonial-card');
+function goToSlide(n) {
+  currentSlide = ((n % cards.length) + cards.length) % cards.length;
+  track.style.transform = `translateX(-${currentSlide * (cards[0].offsetWidth + 24)}px)`;
+}
+document.getElementById('prevBtn').addEventListener('click', () => goToSlide(currentSlide - 1));
+document.getElementById('nextBtn').addEventListener('click', () => goToSlide(currentSlide + 1));
+setInterval(() => goToSlide(currentSlide + 1), 5000);
+window.addEventListener('resize', () => goToSlide(currentSlide));
+</script>
+</body>
+</html>
