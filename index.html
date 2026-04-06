@@ -18,7 +18,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -30,7 +29,6 @@
     cursor: none;
   }
 
-  /* Custom Cursor */
   .cursor {
     position: fixed;
     width: 12px; height: 12px;
@@ -54,7 +52,6 @@
   }
   body:hover .cursor { opacity: 1; }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -99,7 +96,6 @@
   }
   .nav-cta:hover { background: var(--cream); transform: translateY(-1px); }
 
-  /* HERO */
   #hero {
     min-height: 100vh;
     display: grid;
@@ -185,11 +181,7 @@
     opacity: 0;
     animation: fadeIn 1s 1s forwards;
   }
-  .hero-visual {
-    width: 380px;
-    height: 480px;
-    position: relative;
-  }
+  .hero-visual { width: 380px; height: 480px; position: relative; }
   .hero-card {
     position: absolute;
     background: var(--gray);
@@ -218,36 +210,29 @@
   }
   .hero-card-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
   .hero-card.float-1 {
-    width: 160px;
-    top: -20px; right: -30px;
-    background: var(--acid);
-    color: var(--black);
-    border: none;
-    z-index: 2;
+    width: 160px; top: -20px; right: -30px;
+    background: var(--acid); color: var(--black);
+    border: none; z-index: 2;
     animation: float 3s ease-in-out infinite;
   }
   .hero-card.float-1 .hero-card-label { color: rgba(0,0,0,0.5); }
   .hero-card.float-1 .hero-card-value { font-size: 2.8rem; color: var(--black); }
   .hero-card.float-2 {
-    width: 180px;
-    bottom: -20px; left: -30px;
-    z-index: 2;
-    background: var(--mid);
+    width: 180px; bottom: -20px; left: -30px;
+    z-index: 2; background: var(--mid);
     animation: float 4s ease-in-out infinite reverse;
   }
   .big-number {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 9rem;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%,-50%);
     color: rgba(200,255,0,0.06);
     pointer-events: none;
     white-space: nowrap;
   }
 
-  /* MARQUEE */
   .marquee-wrap {
     overflow: hidden;
     border-top: 1px solid var(--mid);
@@ -256,8 +241,7 @@
     background: var(--gray);
   }
   .marquee-track {
-    display: flex;
-    gap: 60px;
+    display: flex; gap: 60px;
     animation: marquee 20s linear infinite;
     white-space: nowrap;
   }
@@ -267,13 +251,10 @@
     letter-spacing: 0.08em;
     color: var(--text-muted);
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 24px;
+    display: flex; align-items: center; gap: 24px;
   }
   .marquee-item .dot { width: 6px; height: 6px; background: var(--acid); border-radius: 50%; }
 
-  /* PROGRAMS */
   #programs { padding: 100px 48px; }
   .section-header {
     display: flex;
@@ -306,7 +287,6 @@
     cursor: none;
   }
   .section-link:hover { color: var(--acid); border-color: var(--acid); }
-
   .programs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -360,27 +340,10 @@
   }
   .program-card:hover .program-tag { border-color: var(--acid); color: var(--acid); }
 
-  /* TIMER */
   #timer { padding: 80px 48px; background: var(--gray); }
-  .timer-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .timer-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--acid);
-    margin-bottom: 16px;
-  }
-  .timer-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    line-height: 0.95;
-    margin-bottom: 20px;
-  }
+  .timer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .timer-label { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--acid); margin-bottom: 16px; }
+  .timer-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 4vw, 4rem); line-height: 0.95; margin-bottom: 20px; }
   .timer-desc { color: var(--text-muted); line-height: 1.7; font-size: 0.9rem; margin-bottom: 32px; }
   .workout-timer {
     background: var(--black);
@@ -406,13 +369,7 @@
     transition: color 0.3s;
   }
   .timer-display.rest { color: var(--red); }
-  .timer-phase {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
+  .timer-phase { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
   .timer-controls { display: flex; gap: 12px; justify-content: center; margin-top: 32px; }
   .timer-btn {
     padding: 12px 32px;
@@ -445,36 +402,22 @@
   .progress-ring { transform: rotate(-90deg); }
   .progress-ring-bg { fill: none; stroke: var(--mid); stroke-width: 4; }
   .progress-ring-fill {
-    fill: none;
-    stroke: var(--acid);
-    stroke-width: 4;
+    fill: none; stroke: var(--acid); stroke-width: 4;
     stroke-linecap: round;
-    stroke-dasharray: 502;
-    stroke-dashoffset: 502;
+    stroke-dasharray: 502; stroke-dashoffset: 502;
     transition: stroke-dashoffset 1s linear, stroke 0.3s;
   }
   .progress-ring-fill.rest-color { stroke: var(--red); }
   .timer-center {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
   }
 
-  /* BMI */
   #bmi { padding: 100px 48px; }
   .bmi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
   .input-group { margin-bottom: 24px; }
-  .input-label {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-  }
+  .input-label { display: block; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
   .input-row { display: flex; gap: 12px; }
   .ts-input {
     flex: 1;
@@ -497,10 +440,8 @@
     position: relative;
     overflow: hidden;
     min-height: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
   }
   .bmi-result::before {
     content: '';
@@ -514,18 +455,11 @@
   .bmi-result.normal::before { background: var(--acid); }
   .bmi-result.overweight::before { background: #f4a837; }
   .bmi-result.obese::before { background: var(--red); }
-  .bmi-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 8rem;
-    line-height: 1;
-    color: var(--acid);
-    transition: color 0.5s;
-  }
+  .bmi-num { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; line-height: 1; color: var(--acid); transition: color 0.5s; }
   .bmi-category { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.05em; margin: 8px 0; }
   .bmi-advice { font-size: 0.82rem; color: var(--text-muted); max-width: 260px; line-height: 1.6; margin-top: 12px; }
   .bmi-placeholder { font-size: 0.9rem; color: var(--text-muted); }
 
-  /* STATS */
   #stats { padding: 80px 48px; background: var(--acid); color: var(--black); }
   .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
   .stat-card {
@@ -540,7 +474,6 @@
   .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; letter-spacing: 0.02em; }
   .stat-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; opacity: 0.6; }
 
-  /* TESTIMONIALS */
   #testimonials { padding: 100px 48px; }
   .testimonials-slider { overflow: hidden; position: relative; }
   .testimonials-track { display: flex; gap: 24px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
@@ -578,7 +511,6 @@
   }
   .slider-btn:hover { background: var(--acid); color: var(--black); border-color: var(--acid); }
 
-  /* CTA */
   #cta { padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
   .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,255,0,0.08) 0%, transparent 70%); }
   .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem,8vw,8rem); line-height: 0.9; position: relative; }
@@ -586,7 +518,6 @@
   .cta-sub { font-size: 1rem; color: var(--text-muted); margin-top: 24px; margin-bottom: 48px; position: relative; }
   .cta-actions { display: flex; gap: 16px; justify-content: center; position: relative; }
 
-  /* FOOTER */
   footer {
     border-top: 1px solid var(--mid);
     padding: 48px;
@@ -602,17 +533,14 @@
   .footer-links a { font-size: 0.75rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; cursor: none; }
   .footer-links a:hover { color: var(--acid); }
 
-  /* SCROLL REVEAL */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s, transform 0.7s; }
   .reveal.visible { opacity: 1; transform: none; }
 
-  /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
@@ -641,21 +569,21 @@
     <li><a href="#bmi">BMI Calc</a></li>
     <li><a href="#testimonials">Results</a></li>
   </ul>
-  <button class="nav-cta">Start Free Trial</button>
+  <button class="nav-cta" onclick="openConsultForm()">Book a Consultation</button>
 </nav>
 
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-left">
-    <p class="hero-tag">⚡ Est. 2018 — Karachi & Online</p>
+    <p class="hero-tag">⚡ Est. 2026 — Multan, Pakistan</p>
     <h1 class="hero-title">
       TRAIN<br>SMART.<br>
       <span class="accent">TRAIN STRONG.</span>
     </h1>
-    <p class="hero-sub">TS Fitness is where elite methodology meets everyday discipline. Personalized coaching, science-backed programming, and a community that refuses to quit.</p>
+    <p class="hero-sub">Founded by <strong style="color:var(--cream)">Muhammad Talha Saeed</strong> — a personal professional fitness trainer based in Multan, Pakistan. Elite methodology, personalized coaching, and a community that refuses to quit.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">Explore Programs</button>
-      <button class="btn-ghost" onclick="document.getElementById('bmi').scrollIntoView({behavior:'smooth'})">Check Your BMI</button>
+      <button class="btn-ghost" onclick="openConsultForm()">Book a Consultation</button>
     </div>
   </div>
   <div class="hero-right">
@@ -748,7 +676,7 @@
       <span class="program-icon">🤝</span>
       <span class="program-num">06</span>
       <h3 class="program-title">1-on-1 Coaching</h3>
-      <p class="program-desc">Fully personalized program, nutrition plan, and weekly check-ins directly with a TS certified coach.</p>
+      <p class="program-desc">Fully personalized program, nutrition plan, and weekly check-ins directly with Talha.</p>
       <span class="program-tag">Ongoing · Premium</span>
     </div>
   </div>
@@ -873,7 +801,7 @@
       <div class="testimonial-card">
         <div class="testimonial-quote">"</div>
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">I had lower back issues for years. After just 6 weeks of Mobility Reset with my TS coach, I'm pain-free and squatting more than I ever have. Absolutely incredible.</p>
+        <p class="testimonial-text">I had lower back issues for years. After just 6 weeks of Mobility Reset with Talha, I'm pain-free and squatting more than I ever have. Absolutely incredible.</p>
         <div class="testimonial-author">
           <div class="author-avatar">FA</div>
           <div>
@@ -910,10 +838,125 @@
   </h2>
   <p class="cta-sub reveal">14 days free. No credit card. Cancel anytime. Just results.</p>
   <div class="cta-actions reveal">
-    <button class="btn-primary">Start Free Trial</button>
-    <button class="btn-ghost">Book a Consult</button>
+    <button class="btn-primary" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">Explore Programs</button>
+    <button class="btn-ghost" onclick="openConsultForm()">Book a Consultation</button>
   </div>
 </section>
+
+<!-- CONSULTATION FORM MODAL -->
+<div id="consultModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+">
+  <div style="
+    background:#1a1a1a;
+    border:1px solid #2e2e2e;
+    width:100%;
+    max-width:560px;
+    margin:24px;
+    position:relative;
+    overflow:hidden;
+  ">
+    <div style="height:3px;background:linear-gradient(90deg,#c8ff00,#ff2b2b);"></div>
+    <div style="padding:48px;">
+      <button onclick="closeConsultForm()" style="
+        position:absolute;top:20px;right:20px;
+        background:transparent;border:1px solid #2e2e2e;
+        color:#777;width:36px;height:36px;
+        font-size:1.1rem;cursor:none;
+        transition:all 0.2s;display:flex;align-items:center;justify-content:center;
+      " onmouseover="this.style.borderColor='#c8ff00';this.style.color='#c8ff00'"
+         onmouseout="this.style.borderColor='#2e2e2e';this.style.color='#777'">✕</button>
+
+      <p style="font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:#c8ff00;margin-bottom:12px;">Free Consultation</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:0.95;margin-bottom:8px;">BOOK YOUR<br><span style="color:#c8ff00">SESSION</span></h2>
+      <p style="color:#777;font-size:0.85rem;margin-bottom:36px;line-height:1.6;">Fill in your details and Muhammad Talha Saeed will reach out to you personally within 24 hours.</p>
+
+      <div id="formSuccess" style="display:none;text-align:center;padding:32px 0;">
+        <div style="font-size:3rem;margin-bottom:16px;">✅</div>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#c8ff00;margin-bottom:8px;">REQUEST SENT!</h3>
+        <p style="color:#777;font-size:0.85rem;line-height:1.6;">Talha will contact you within 24 hours.<br>Get ready to transform! 💪</p>
+      </div>
+
+      <div id="consultFormWrap">
+        <form id="consultForm" action="https://formspree.io/f/mdapyqow" method="POST">
+          <input type="hidden" name="_subject" value="New Consultation Request — TS Fitness">
+
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#777;margin-bottom:8px;">Full Name *</label>
+            <input type="text" name="name" required placeholder="e.g. Ahmed Khan" style="
+              width:100%;background:#0a0a0a;border:1px solid #2e2e2e;
+              color:#f5f0e8;padding:14px 18px;font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;outline:none;transition:border-color 0.2s;
+            "
+            onfocus="this.style.borderColor='#c8ff00'"
+            onblur="this.style.borderColor='#2e2e2e'">
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#777;margin-bottom:8px;">Phone / WhatsApp *</label>
+            <input type="tel" name="phone" required placeholder="e.g. +92 300 1234567" style="
+              width:100%;background:#0a0a0a;border:1px solid #2e2e2e;
+              color:#f5f0e8;padding:14px 18px;font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;outline:none;transition:border-color 0.2s;
+            "
+            onfocus="this.style.borderColor='#c8ff00'"
+            onblur="this.style.borderColor='#2e2e2e'">
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#777;margin-bottom:8px;">Your Fitness Goal</label>
+            <select name="goal" style="
+              width:100%;background:#0a0a0a;border:1px solid #2e2e2e;
+              color:#f5f0e8;padding:14px 18px;font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;outline:none;cursor:none;
+            ">
+              <option value="">Select a goal...</option>
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="Body Recomposition">Body Recomposition</option>
+              <option value="Athletic Performance">Athletic Performance</option>
+              <option value="General Fitness">General Fitness</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:28px;">
+            <label style="display:block;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#777;margin-bottom:8px;">Anything else? (optional)</label>
+            <textarea name="message" rows="3" placeholder="Tell Talha a bit about yourself..." style="
+              width:100%;background:#0a0a0a;border:1px solid #2e2e2e;
+              color:#f5f0e8;padding:14px 18px;font-family:'DM Sans',sans-serif;
+              font-size:0.9rem;outline:none;resize:vertical;transition:border-color 0.2s;
+            "
+            onfocus="this.style.borderColor='#c8ff00'"
+            onblur="this.style.borderColor='#2e2e2e'"></textarea>
+          </div>
+
+          <button type="submit" id="submitBtn" style="
+            width:100%;background:#c8ff00;color:#0a0a0a;
+            padding:16px;font-family:'DM Sans',sans-serif;
+            font-weight:500;font-size:0.85rem;letter-spacing:0.15em;
+            text-transform:uppercase;border:none;cursor:none;
+            transition:all 0.25s;
+          "
+          onmouseover="this.style.background='#f5f0e8'"
+          onmouseout="this.style.background='#c8ff00'">
+            Send Consultation Request →
+          </button>
+
+          <p style="text-align:center;font-size:0.72rem;color:#555;margin-top:16px;">
+            📧 Sent directly to talhasaeed.047.edu@gmail.com
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-logo">TS <span>FITNESS</span></div>
@@ -921,10 +964,10 @@
     <a href="#">Programs</a>
     <a href="#">About</a>
     <a href="#">Blog</a>
-    <a href="#">Instagram</a>
-    <a href="#">Contact</a>
+    <a href="https://www.instagram.com/talhasaeed005/" target="_blank">Instagram</a>
+    <a href="#" onclick="openConsultForm();return false;">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 TS Fitness. All rights reserved.</div>
+  <div class="footer-copy">© 2026 TS Fitness by Muhammad Talha Saeed. All rights reserved.</div>
 </footer>
 
 <script>
@@ -1066,7 +1109,7 @@ document.getElementById('calcBmiBtn').addEventListener('click', () => {
   if (bmi < 18.5) { category = 'Underweight'; cls = 'underweight'; color = '#5ba4cf'; advice = 'Focus on caloric surplus and strength training to build lean muscle mass.'; }
   else if (bmi < 25) { category = 'Normal Weight'; cls = 'normal'; color = '#c8ff00'; advice = "You're in a healthy range! Focus on maintaining with balanced training and nutrition."; }
   else if (bmi < 30) { category = 'Overweight'; cls = 'overweight'; color = '#f4a837'; advice = 'A combination of cardio and strength training with a mild caloric deficit will help.'; }
-  else { category = 'Obese'; cls = 'obese'; color = '#ff2b2b'; advice = 'Start with low-impact exercise and consult a TS coach for a personalized approach.'; }
+  else { category = 'Obese'; cls = 'obese'; color = '#ff2b2b'; advice = 'Start with low-impact exercise and consult Talha for a personalized approach.'; }
   result.className = `bmi-result ${cls}`;
   result.innerHTML = `<div class="bmi-num" style="color:${color}">${bmi}</div><div class="bmi-category">${category}</div><p class="bmi-advice">${advice}</p>`;
 });
@@ -1082,6 +1125,53 @@ document.getElementById('prevBtn').addEventListener('click', () => goToSlide(cur
 document.getElementById('nextBtn').addEventListener('click', () => goToSlide(currentSlide + 1));
 setInterval(() => goToSlide(currentSlide + 1), 5000);
 window.addEventListener('resize', () => goToSlide(currentSlide));
+
+// Consultation Modal
+function openConsultForm() {
+  const modal = document.getElementById('consultModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  document.getElementById('consultFormWrap').style.display = 'block';
+  document.getElementById('formSuccess').style.display = 'none';
+  document.getElementById('consultForm').reset();
+}
+function closeConsultForm() {
+  document.getElementById('consultModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('consultModal').addEventListener('click', function(e) {
+  if (e.target === this) closeConsultForm();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeConsultForm(); });
+
+document.getElementById('consultForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('consultFormWrap').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      btn.textContent = 'Error — Try Again';
+      btn.style.background = '#ff2b2b';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Error — Try Again';
+    btn.style.background = '#ff2b2b';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
